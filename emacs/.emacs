@@ -87,5 +87,18 @@
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
-;load custom file defined above for overwrite any properties
+(defun duplicate-line()
+  (interactive)
+  (let ((column (- (point) (point-at-bol)))
+        (line (let ((s (thing-at-point 'line t)))
+              (if s (string-remove-suffix "\n" s) ""))))
+  (move-end-of-line 1)
+  (newline)
+  (insert line)
+  (move-beginning-of-line 1)
+  (forward-char column)))
+
+(global-set-key (kbd "C-d") 'duplicate-line)
+
+;load custom file defined to overwrite any properties
 (load-file custom-file)
