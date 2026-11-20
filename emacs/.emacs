@@ -1,3 +1,11 @@
+;;writing configuration while emacs.version==30.1 (file: .emacs);;
+
+;load emacs lisp packages, and activate them
+(package-initialize)
+
+;add melpa to the package repository list
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
 ;set custom emacs lisp file for system overwriting
 (setq custom-file "~/.config/emacs-custom.el")
 
@@ -25,7 +33,7 @@
 ;enable navigation between different windows
 (windmove-default-keybindings)
 
-;set character encoding to UTF-8, so that colored and UTF characters can be printable
+;set character encoding to UTF-8, so that colored and UTF-8 characters can be printable
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
 (set-terminal-coding-system 'utf-8)
@@ -71,7 +79,13 @@
 (add-to-list 'display-buffer-alist
              '(".*"
                (display-buffer-in-side-window)
-               (side . bottom)))
+               (side . bottom)
+               (window-height . (lambda (window)
+                                  fit-window-to-buffer window nil 10))))
+
+(use-package smex :defer t)
+(global-set-key (kbd "M-x") 'smex)
+(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;load custom file defined above for overwrite any properties
 (load-file custom-file)
