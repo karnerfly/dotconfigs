@@ -15,8 +15,15 @@
 ;;disable initial screen of emacs
 (setq inhibit-startup-screen t)
 
+;;set default font type to Iosevka and size to 16
+(set-frame-font "Iosevka 16" nil t)
+;(set-face-attribute 'default nil :height 160)
+
 ;;disable top menu bar
 (menu-bar-mode 0)
+
+;;disable top menu bar
+(tool-bar-mode 0)
 
 ;;enable line number (relative line number)
 (global-display-line-numbers-mode 1)
